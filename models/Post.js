@@ -20,7 +20,7 @@ Post.init(
       allowNull: false,
     },
     authorUserId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: 'user',
@@ -32,7 +32,6 @@ Post.init(
     sequelize,
     timestamps: true,
     freezeTableName: true,
-    underscored: true,
     modelName: 'post',
   }
 );

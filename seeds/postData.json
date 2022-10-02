@@ -1,0 +1,12 @@
+[
+    {
+        "postTitle": "Git",
+        "postBody": "Thank Goodness we have Git!",
+        "authorUserId": 1
+    },
+    {
+        "postTitle": "Javascript...",
+        "postBody": "Can be very confusing",
+        "authorUserId": 2
+    }
+]
