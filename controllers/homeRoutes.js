@@ -41,13 +41,38 @@ router.get('/', async (req, res) => {
  
 });
 
-router.get('/login', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/');
-    return;
-  }
+router.get('/signup', async (req, res) => {
+  try{ 
+      res.render('signup');
+  } catch (err) {
+      res.status(500).json(err);
+  };  
+}
 
-  res.render('login');
+)
+
+router.get('/login', (req, res) => {
+  try{ 
+    res.render('login');
+} catch (err) {
+    res.status(500).json(err);
+}; 
+});
+
+router.get('/dashboard', (req, res) => {
+  try{ 
+    res.render('dashboard');
+} catch (err) {
+    res.status(500).json(err);
+}; 
+});
+
+router.get('/loggedout', (req, res) => {
+  try{ 
+    res.render('loggedout');
+} catch (err) {
+    res.status(500).json(err);
+}; 
 });
 
 module.exports = router;
