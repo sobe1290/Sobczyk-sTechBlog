@@ -19,14 +19,20 @@
             <li class="nav-item">
                 <a class="nav-link active text-light" aria-current="page" href="/login">Dashboard</a>
               </li>
+              {{#if logged_in}}
             <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="/loggedout">Logout</a>
+                <a id="logout" class="nav-link active text-light" aria-current="page" href="/loggedout">Logout</a>
               </li>
+              {{/if}}
         </ul>
     </div>
 </nav>
 
 {{{ body }}}
+
+{{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
 
 </body>
 
