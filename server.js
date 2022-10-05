@@ -7,24 +7,26 @@ const hbs = exphbs.create({});
 // const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // const hbs = exphbs.create({ helpers });
 
-// const sess = {
-//   secret: '',
-//   cookie: {},
-//   resave: false,
-//   saveUninitialized: true,
-//   store: new SequelizeStore({
-//     db: sequelize
-//   })
-// };
+const sess = {
+  secret: 'thisShouldBeInLocalEnv',
+  cookie: {
+    maxage: 24 * 60 * 60 * 1000
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
 
-// app.use(session(sess));
+app.use(session(sess));
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
