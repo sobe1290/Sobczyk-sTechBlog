@@ -1,0 +1,12 @@
+[
+    {
+        "commentBody": "Test Comment",
+        "commentUserId": 1,
+        "commentPostId": 1
+    },
+    {
+        "commentBody": "Test2 Comment2",
+        "commentUserId": 2,
+        "commentPostId": 1
+    }
+]

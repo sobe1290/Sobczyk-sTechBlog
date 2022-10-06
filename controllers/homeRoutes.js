@@ -76,9 +76,11 @@ router.get('/post/:id', async (req, res) => {
       include: [{
         model: User,
         attributes: ['username'],
-      }
-
-      ]
+      },
+      {
+        model: Comment,
+        attributes: ['commentBody', 'commentUserID', 'commentPostId'],
+      }]
     })
     const renderOnePost = onePost.get({ plain: true })
 
