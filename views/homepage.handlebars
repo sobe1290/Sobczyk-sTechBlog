@@ -14,12 +14,12 @@
       </div>
 
 {{#each posts as |post|}}
-<div class="container rounded  p-5 my-5 bg-dark text-white">
+<a href="/post/{{post.id}}" class="text-decoration-none">
+<div id="post{{post.id}}" class="container rounded  p-5 my-5 bg-dark text-white">
     <h1>{{post.postTitle}}</h1>
     <h2>{{post.postBody}}</h2>    
     <p>Posted by {{post.user.username}} on {{post.createdAt}}</p>
-</div>
-
-  </div>
+</div> 
+</a>
 {{/each}}
-
+</div>

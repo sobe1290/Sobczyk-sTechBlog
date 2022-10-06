@@ -2,24 +2,6 @@ const router = require('express').Router();
 const { User, Post } = require('../models');
 const withAuth = require('../utils/auth');
 
-// router.get('/', withAuth, async (req, res) => {
-//   try {
-//     const userData = await User.findAll({
-//       attributes: { exclude: ['password'] },
-//       order: [['name', 'ASC']],
-//     });
-
-//     const users = userData.map((project) => project.get({ plain: true }));
-
-//     res.render('homepage', {
-//       users,
-//       logged_in: req.session.logged_in,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 router.get('/', withAuth, async (req, res) => {
   try{ 
     const postData = await Post.findAll({
@@ -78,7 +60,7 @@ router.get('/loggedout', (req, res) => {
 }; 
 });
 
-router.get('/newpost', (req, res) => {
+router.get('/newpost', withAuth, (req, res) => {
   try{ 
     res.render('newpost',{
       logged_in: req.session.logged_in,
@@ -87,5 +69,27 @@ router.get('/newpost', (req, res) => {
     res.status(500).json(err);
 }; 
 });
+
+router.get('/post/:id', async (req, res) => {
+  try {
+    const onePost = await Post.findByPk(req.params.id, {
+      include: [{
+        model: User,
+        attributes: ['username'],
+      }
+
+      ]
+    })
+    const renderOnePost = onePost.get({ plain: true })
+
+    res.render('onePost', {
+      renderOnePost,
+      logged_in: req.session.logged_in,
+    })
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 module.exports = router;
