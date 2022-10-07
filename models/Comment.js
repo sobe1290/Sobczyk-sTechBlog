@@ -15,7 +15,7 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    commentUserId: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

@@ -19,7 +19,7 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    authorUserId: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
