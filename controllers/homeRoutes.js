@@ -42,14 +42,27 @@ router.get('/login', (req, res) => {
 }; 
 });
 
-router.get('/dashboard', withAuth, (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
   try{ 
-    res.render('dashboard',{
-      logged_in: req.session.logged_in,
+    const myPosts = await Post.findAll({
+      where: {userId: req.session.user_id,},
+      include: [{
+        model: User,
+        attributes: ['username'],
+      }
+
+      ]
+    }).catch((err) => { 
+      res.json(err);
     });
-} catch (err) {
-    res.status(500).json(err);
-}; 
+      const posts = myPosts.map((mypost) => mypost.get({ plain: true }));
+      res.render('dashboard', { 
+        posts,
+      logged_in: req.session.logged_in });
+  } catch (err) {
+      res.status(500).json(err);
+  };   
+ 
 });
 
 router.get('/loggedout', (req, res) => {
@@ -113,5 +126,30 @@ router.post('/addcomment', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get('/mypost/:id', withAuth, async (req, res) => {
+  try {
+    const onePost = await Post.findOne({
+      where: {id: req.params.id},
+      include: [
+        User,
+        {
+          model: Comment,
+          include: [User],
+        },
+      ],
+    });
+    const renderOnePost = onePost.get({ plain: true })
+
+    res.render('myOnePost', {
+      renderOnePost,
+      logged_in: req.session.logged_in,
+    })
+
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+})
 
 module.exports = router;

@@ -22,4 +22,23 @@ router.post('/', async (req, res) => {
     }
   });
 
+  router.delete("/:id", (req, res) => {
+    Post.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then((thisPost) => {
+        if (!thisPost) {
+          res.status(404).json({ message: "No Post found with this id" });
+          return;
+        }
+        res.json(thisPost);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+
 module.exports = router;
