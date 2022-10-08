@@ -16,28 +16,28 @@ Comment.init(
       allowNull: false,
     },
     userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'user',
-          key: 'id',
-        },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
     },
     commentPostId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'post',
-          key: 'id',
-        },
-    }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'post',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize,
     timestamps: true,
     freezeTableName: true,
     modelName: 'comment',
-  }
+  },
 );
 
 module.exports = Comment;

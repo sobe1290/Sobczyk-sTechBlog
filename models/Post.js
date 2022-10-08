@@ -20,20 +20,20 @@ Post.init(
       allowNull: false,
     },
     userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'user',
-          key: 'id',
-        },
-    }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize,
     timestamps: true,
     freezeTableName: true,
     modelName: 'post',
-  }
+  },
 );
 
 module.exports = Post;

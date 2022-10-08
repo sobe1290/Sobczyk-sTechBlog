@@ -3,8 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
-const hbs = exphbs.create({});
 
+const hbs = exphbs.create({});
 
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -12,18 +12,16 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-
-
 const sess = {
   secret: 'thisShouldBeInLocalEnv',
   cookie: {
-    maxage: 5 * 60 * 1000
+    maxage: 5 * 60 * 1000,
   },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
 
 app.use(session(sess));
