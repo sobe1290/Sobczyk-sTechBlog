@@ -1,3 +1,5 @@
+//Code that controls what occurs when a user edits a post
+
 const editPostHandler = async (event) => {
   event.preventDefault();
 

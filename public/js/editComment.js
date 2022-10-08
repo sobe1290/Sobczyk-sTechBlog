@@ -1,3 +1,5 @@
+//Code that controls when a user Edits or Deletes a comment
+
 const editCommentHandler = async (event) => {
   event.preventDefault();
 

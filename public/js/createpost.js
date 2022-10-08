@@ -1,3 +1,5 @@
+//Code that controls what occurs when a user creates a new post
+
 const createPostHandler = async (event) => {
   event.preventDefault();
 

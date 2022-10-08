@@ -1,3 +1,5 @@
+//Code that controls what occurs when a user submits new comment
+
 const createCommentHandler = async (event) => {
   event.preventDefault();
 

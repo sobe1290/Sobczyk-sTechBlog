@@ -1,3 +1,5 @@
+//Code that controls looking at only one post by logged in author
+
 const deletePost = async (event) => {
   event.preventDefault();
 
