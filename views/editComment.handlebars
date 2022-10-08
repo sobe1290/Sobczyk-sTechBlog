@@ -1,0 +1,17 @@
+<div class="form newcomment-form container rounded p-5 my-5 bg-info  text-white">
+  <form> 
+    
+      <div class="form-group">
+        <label for="commentEditBody">Post Comment</label>
+        <textarea placeholder="{{renderOneComment.commentBody}}" class="form-control" id="commentBody" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-light mt-3">Submit Comment</button>
+      </div>
+      <p id="specificId" class="d-none">{{renderOneComment.id}}</p>
+    
+  </form>
+  <button id="deleteComment" class="btn btn-dark mt-3">Delete Comment</button>
+</div>
+
+<script src="/js/editComment.js"></script>

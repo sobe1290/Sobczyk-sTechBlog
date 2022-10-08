@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 const sess = {
   secret: 'thisShouldBeInLocalEnv',
   cookie: {
-    maxage: 24 * 60 * 60 * 1000
+    maxage: 5 * 60 * 1000
   },
   resave: false,
   saveUninitialized: true,

@@ -108,7 +108,7 @@ router.get('/post/:id', async (req, res) => {
   }
 })
 
-router.post('/addcomment', async (req, res) => {
+router.post('/addcomment', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.create({
       commentBody: req.body.commentBody,
@@ -151,5 +151,62 @@ router.get('/mypost/:id', withAuth, async (req, res) => {
     res.send(err);
   }
 })
+
+router.get('/comment/:id', withAuth, async (req, res) => {
+  try {
+    const oneComment = await Comment.findOne({
+      where: {id: req.params.id},
+    });
+    const renderOneComment = oneComment.get({ plain: true })
+
+    res.render('editComment', {
+      renderOneComment,
+      logged_in: req.session.logged_in,
+    })
+
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+})
+
+router.put('/updatecomment', withAuth, (req, res) => {
+  Comment.update({
+          commentBody: req.body.commentBody
+      }, {
+          where: {
+              id: req.body.id
+          }
+      }).then(updateCommentData => {
+          if (!updateCommentData) {
+              res.status(404).json({ message: 'No comment found with this id' });
+              return;
+          }
+          res.json(updateCommentData);
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+      });
+});
+
+router.delete("/comment/:id", withAuth, (req, res) => {
+  Comment.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((thisPost) => {
+      if (!thisPost) {
+        res.status(404).json({ message: "No Post found with this id" });
+        return;
+      }
+      res.json(thisPost);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 module.exports = router;

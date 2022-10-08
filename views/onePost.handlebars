@@ -8,11 +8,23 @@
     </div> 
 </div>
 
+{{#if logged_in}}
 {{>addcomment}}
-
 
 {{#each renderOnePost.comments as |comment|}}
 {{> commentcontainer}}
 {{/each}}
 
+
 <script src="/js/addcomment.js"></script>
+<script src="/js/editComment.js"></script>
+
+{{else}}
+
+{{#each renderOnePost.comments as |comment|}}
+{{> commentcontainer}}
+{{/each}}
+
+{{/if}}
+
+
