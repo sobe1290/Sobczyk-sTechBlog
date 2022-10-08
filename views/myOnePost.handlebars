@@ -5,7 +5,7 @@
     <h2>{{renderOnePost.postBody}}</h2>    
     <p>Posted by {{renderOnePost.user.username}} on {{renderOnePost.createdAt}}</p>
     <p id="specificId" class="d-none">{{renderOnePost.id}}</p>
-    <button id="editPost" class="btn btn-dark">Edit Post</button>
+    <a href="/api/posts/{{renderOnePost.id}}" class="btn btn-dark">Edit Post</a>
     <button id="deletePost" class="btn btn-dark">Delete Post</button>
     </div> 
 </div>

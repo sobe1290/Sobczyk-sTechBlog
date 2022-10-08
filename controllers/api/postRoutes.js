@@ -41,4 +41,43 @@ router.post('/', async (req, res) => {
       });
   });
 
+  router.put('/:id', (req, res) => {
+    Post.update({
+            postTitle: req.body.postTitle,
+            postBody: req.body.postBody
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(updatePostData => {
+            if (!updatePostData) {
+                res.status(404).json({ message: 'No post found with this id' });
+                return;
+            }
+            res.json(updatePostData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const onePost = await Post.findOne({
+      where: {id: req.params.id},
+    });
+    const renderOnePost = onePost.get({ plain: true })
+
+    res.render('editPost', {
+      renderOnePost,
+      logged_in: req.session.logged_in,
+    })
+
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+})
+
 module.exports = router;
