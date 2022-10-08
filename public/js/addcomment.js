@@ -1,7 +1,7 @@
 const createCommentHandler = async (event) => {
     event.preventDefault();
 
-    const postNumber = document.getElementById('specificId').value;
+    const postNumber = specificId.innerHTML;
     const commentBody = document.getElementById('commentBody').value;
 
     if (postNumber && commentBody) {
@@ -13,14 +13,15 @@ const createCommentHandler = async (event) => {
       })
 
       if (response.ok) {
-        document.location.replace('/');
+        document.location.replace(`/post/${postNumber}`);
       } else {
         alert('Failed to create comment.');
       }
 
     }
   
-  
+  console.log(postNumber);
+  console.log(commentBody);
     
   };
   
